@@ -4,7 +4,7 @@ package require qsys
 
 if {[file exists ./../../../scripts/settings.tcl] } { source ./../../../scripts/settings.tcl }
 if {![info exists module]}      { set module Mercury_AA1 }
-if {![info exists module_name]} { set module_name ME-AA1-270-3E4-D11E }
+if {![info exists module_name]} { set module_name ME-AA1-270-3E4-D11E-NFX3 }
 if {![info exists part]}        { set part 10AS027E4F29E3SG }
 if {![info exists boot_mode]}   { set boot_mode sdmmc }
 if {![info exists system_name]} { set system_name ${module}_pd }
@@ -109,7 +109,7 @@ set_instance_parameter_value emif_a10_hps_0 {PHY_DDR4_USER_RZQ_IO_STD_ENUM} {IO_
 set_instance_parameter_value emif_a10_hps_0 {PROTOCOL_ENUM} {PROTOCOL_DDR4}
 set_instance_parameter_value emif_a10_hps_0 {SHORT_QSYS_INTERFACE_NAMES} {1}
 
-if { $module_name == "ME-AA1-270-3E4-D11E" } {
+if { $module_name == "ME-AA1-270-3E4-D11E-NFX3" } {
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_READ_DBI} {false}
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_SPEEDBIN_ENUM} {DDR4_SPEEDBIN_1866}
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_TCCD_L_CYC} {5}
@@ -134,7 +134,7 @@ if { $module_name == "ME-AA1-270-3E4-D11E" } {
 	set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_TRFC_NS} {260.0}
 }
 
-if { ($module_name == "ME-AA1-270-2I2-D11E") || ($module_name == "ME-AA1-480-2I3-D12E") } {
+if { ($module_name == "ME-AA1-270-2I2-D11E-NFX3") || ($module_name == "ME-AA1-480-2I3-D12E-NFX3") } {
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_READ_DBI} {false}
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_SPEEDBIN_ENUM} {DDR4_SPEEDBIN_2133}
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_TCCD_L_CYC} {6}
@@ -159,7 +159,7 @@ if { ($module_name == "ME-AA1-270-2I2-D11E") || ($module_name == "ME-AA1-480-2I3
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_TRFC_NS} {260.0}
 }
 
-if { $module_name == "ME-AA1-480-2I3-D12E" } {
+if { $module_name == "ME-AA1-480-2I3-D12E-NFX3" } {
     set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_ROW_ADDR_WIDTH} {16}
 	set_instance_parameter_value emif_a10_hps_0 {MEM_DDR4_TRFC_NS} {350.0}
 }

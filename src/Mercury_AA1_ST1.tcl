@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------------
-# Copyright (c) 2023 by Enclustra GmbH, Switzerland.
+# Copyright (c) 2025 by Enclustra GmbH, Switzerland.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this hardware, software, firmware, and associated documentation files (the
@@ -20,15 +20,15 @@
 # ----------------------------------------------------------------------------------------------------
 
  
-# do not use the CLKUSR configuration pin for calibration
-set_global_assignment   -name AUTO_RESERVE_CLKUSR_FOR_CALIBRATION OFF
- 
 # DATA0 configuration pin - for passive serial scheme
 set_global_assignment   -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
  
 set_global_assignment   -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment   -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+ 
+# do not use the CLKUSR configuration pin for calibration
+set_global_assignment   -name AUTO_RESERVE_CLKUSR_FOR_CALIBRATION OFF
 
 # Anios_0
 set_location_assignment PIN_AC12                   -to IO0_D0_P
@@ -51,6 +51,10 @@ set_location_assignment PIN_AB14                   -to IO0_D8_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_D8_P
 set_location_assignment PIN_AA14                   -to IO0_D9_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_D9_N
+set_location_assignment PIN_AD15                   -to IO0_CLK_N
+set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_CLK_N
+set_location_assignment PIN_AE16                   -to IO0_CLK_P
+set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_CLK_P
 set_location_assignment PIN_AE15                   -to IO0_D10_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_D10_P
 set_location_assignment PIN_AE14                   -to IO0_D11_N
@@ -79,10 +83,6 @@ set_location_assignment PIN_AC15                   -to IO0_D22_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_D22_P
 set_location_assignment PIN_AB15                   -to IO0_D23_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_D23_N
-set_location_assignment PIN_AD15                   -to IO0_CLK_N
-set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_CLK_N
-set_location_assignment PIN_AE16                   -to IO0_CLK_P
-set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO0_CLK_P
 
 # Anios_1
 set_location_assignment PIN_Y7                     -to IO1_D0_P
@@ -105,6 +105,10 @@ set_location_assignment PIN_Y1                     -to IO1_D8_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_D8_P
 set_location_assignment PIN_Y2                     -to IO1_D9_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_D9_N
+set_location_assignment PIN_AA8                    -to IO1_CLK_N
+set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_CLK_N
+set_location_assignment PIN_AA9                    -to IO1_CLK_P
+set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_CLK_P
 set_location_assignment PIN_W4                     -to IO1_D10_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_D10_P
 set_location_assignment PIN_Y4                     -to IO1_D11_N
@@ -133,10 +137,6 @@ set_location_assignment PIN_W8                     -to IO1_D22_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_D22_P
 set_location_assignment PIN_W7                     -to IO1_D23_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_D23_N
-set_location_assignment PIN_AA8                    -to IO1_CLK_N
-set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_CLK_N
-set_location_assignment PIN_AA9                    -to IO1_CLK_P
-set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO1_CLK_P
 
 # BUTTONS
 set_location_assignment PIN_Y16                    -to BTN1_N
@@ -147,10 +147,18 @@ set_location_assignment PIN_D15                    -to CLK_PLL
 set_instance_assignment -name IO_STANDARD  "1.2-V" -to CLK_PLL
 
 # CLK_USR
-set_location_assignment PIN_AG15                   -to CLK_USR_N
-set_instance_assignment -name IO_STANDARD  "1.8 V" -to CLK_USR_N
 set_location_assignment PIN_AG14                   -to CLK_USR_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to CLK_USR_P
+
+# DP
+# set_location_assignment PIN_U28                    -to DP_LANE0_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to DP_LANE0_P
+# set_location_assignment PIN_T26                    -to DP_LANE3_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to DP_LANE3_P
+# set_location_assignment PIN_W28                    -to DP_LANE1_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to DP_LANE1_P
+# set_location_assignment PIN_V26                    -to DP_LANE2_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to DP_LANE2_P
 
 # FMC
 set_location_assignment PIN_V6                     -to FMC_HA02_N
@@ -333,6 +341,38 @@ set_location_assignment PIN_B6                     -to FMC_LA33_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to FMC_LA33_N
 set_location_assignment PIN_B5                     -to FMC_LA33_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to FMC_LA33_P
+# set_location_assignment PIN_L28                    -to FMC_DP0_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP0_C2M_P
+# set_location_assignment PIN_K26                    -to FMC_DP0_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP0_M2C_P
+# set_location_assignment PIN_J28                    -to FMC_DP1_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP1_C2M_P
+# set_location_assignment PIN_H26                    -to FMC_DP1_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP1_M2C_P
+# set_location_assignment PIN_G28                    -to FMC_DP2_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP2_C2M_P
+# set_location_assignment PIN_F26                    -to FMC_DP2_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP2_M2C_P
+# set_location_assignment PIN_E28                    -to FMC_DP3_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP3_C2M_P
+# set_location_assignment PIN_D26                    -to FMC_DP3_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP3_M2C_P
+# set_location_assignment PIN_AG28                   -to FMC_DP4_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP4_C2M_P
+# set_location_assignment PIN_AF26                   -to FMC_DP4_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP4_M2C_P
+# set_location_assignment PIN_AE28                   -to FMC_DP5_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP5_C2M_P
+# set_location_assignment PIN_AD26                   -to FMC_DP5_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP5_M2C_P
+# set_location_assignment PIN_AC28                   -to FMC_DP6_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP6_C2M_P
+# set_location_assignment PIN_AB26                   -to FMC_DP6_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP6_M2C_P
+# set_location_assignment PIN_AA28                   -to FMC_DP7_C2M_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP7_C2M_P
+# set_location_assignment PIN_Y26                    -to FMC_DP7_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_DP7_M2C_P
 set_location_assignment PIN_L3                     -to FMC_HA00_CC_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to FMC_HA00_CC_N
 set_location_assignment PIN_L2                     -to FMC_HA00_CC_P
@@ -369,6 +409,8 @@ set_location_assignment PIN_D7                     -to FMC_CLK1_M2C_N
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to FMC_CLK1_M2C_N
 set_location_assignment PIN_C7                     -to FMC_CLK1_M2C_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to FMC_CLK1_M2C_P
+# set_location_assignment PIN_N24                    -to FMC_GCLK0_M2C_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to FMC_GCLK0_M2C_P
 
 # FX3
 set_location_assignment PIN_U8                     -to FX3_CLK
@@ -506,6 +548,10 @@ set_instance_assignment -name IO_STANDARD  "1.2 V" -to ETH_INT_N_R
 set_location_assignment PIN_AC17                   -to I2C_MIPI_SEL
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to I2C_MIPI_SEL
 
+# IO2
+# set_location_assignment PIN_R24                    -to IO2_D0_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to IO2_D0_P
+
 # IO3
 set_location_assignment PIN_AB16                   -to IO3_D0_P
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to IO3_D0_P
@@ -601,3 +647,13 @@ set_location_assignment PIN_AE5                    -to LED2
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to LED2
 set_location_assignment PIN_AD5                    -to LED3
 set_instance_assignment -name IO_STANDARD  "1.8 V" -to LED3
+
+# USB3
+# set_location_assignment PIN_P26                    -to USB0_SSRX_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to USB0_SSRX_P
+# set_location_assignment PIN_M26                    -to USB1_SSRX_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to USB1_SSRX_P
+# set_location_assignment PIN_R28                    -to USB0_SSTX_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to USB0_SSTX_P
+# set_location_assignment PIN_N28                    -to USB1_SSTX_P
+# set_instance_assignment -name IO_STANDARD  "HIGH SPEED DIFFERENTIAL I/O" -to USB1_SSTX_P
